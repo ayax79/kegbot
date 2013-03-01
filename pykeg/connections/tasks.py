@@ -19,6 +19,7 @@
 from pykeg.connections.foursquare import tasks as foursquare_tasks
 from pykeg.connections.twitter import tasks as twitter_tasks
 from pykeg.connections.untappd import tasks as untappd_tasks
+from pykeg.connections.jive import tasks as jive_tasks
 from celery.decorators import task
 
 @task
@@ -26,6 +27,8 @@ def handle_new_event(event):
   twitter_tasks.tweet_event(event)
   foursquare_tasks.checkin_event(event)
   untappd_tasks.checkin_event(event)
+  jive_tasks.post_activity(event)
+
 
 @task
 def handle_new_picture(picture_id):
